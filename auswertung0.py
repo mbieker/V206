@@ -59,6 +59,20 @@ def err(data):
     err = sqrt(err/((N-1)*N))
     return ufloat(mean,err)
 
+def lin_reg(x,y):
+    N = len(x)
+    sumx = x.sum()
+    sumy = y.sum()
+    sumxx = (x*x).sum()
+    sumxy = (x*y).sum()
+    m = (sumxy -  sumx*sumy/N)/(sumxx- sumx**2/N)
+    b = sumy/N - m*sumx/N
+    
+    sy = sqrt(((y - m*x - b)**2).sum()/(N-1))
+    m_err = sy *sqrt(N/(N*sumxx - sumx**2))
+    b_err= m_err * sqrt(sumxx/N)
+    return ufloat(m,m_err), ufloat(b,b_err)
+
 
 def T_quad(x,A,B,C):
     return A*x**2+B*x+C
@@ -71,6 +85,8 @@ t,p_a, p_b, T_2, T_1, P = loadtxt('Messwerte/mess', unpack = 'true')
 t *= 60 # Messzeit in sec umwandeln
 T_1 += 273.15 # Temperaturen in Kelvin umechenen
 T_2 += 273.15 
+p_a = (p_a+1)*1e5 
+p_b = (p_b+1)*1e5 
 data =array( [[t[i],p_a[i], p_b[i], T_1[i], T_2[i], P[i]] for i in range(0,33)])
 
 
@@ -109,6 +125,8 @@ dT1_dt = array([2*A_1 * t[i] + B_1 for i in [8,16,24,32]])
 dT2_dt =array([ 2*A_2 * t[i] + B_2 for i in [8,16,24,32]])
 T1_ = array([T_1[i] for i in [8,16,24,32]])
 T2_ = array([T_2[i] for i in [8,16,24,32]])
+pb_ = array([p_b[i] for i in [8,16,24,32]])
+pa_ = array([p_a[i] for i in [8,16,24,32]])
 t_ =60*  array([8,16,24,32])
 P_ = [ P[i]for i in [8,16,24,32]]
 #4 Zeiten fuer die Weitere Analyse auswaehlen und Ableitungen berechen
@@ -125,8 +143,9 @@ print(output)
 ## Guetezaheln berechen fuer die Verschieden Zeitupunkte
 rho_w = ufloat(0.99799,0) # kg/L Dichte von Wasser bei 20C Teubner phys. Praktikum
 c_w =ufloat(4180,2)  # Spezifische Waerme Kapazitaet des wasser 20-40 C
-V1 = ufloat(4,0.01)
-nu_real = ( V1*rho_w*c_w + 750)* dT1_dt /P_
+V = ufloat(4,0.01)
+R = 8.3143 # molare Gaskonstante
+nu_real = ( V*rho_w*c_w + 750)* dT1_dt /P_
 nu_id   =[round(T1_[i]/(T1_[i]-T2_[i]),2) for i in range(4)]
 
 #Ausgabe der Tabelle
@@ -136,3 +155,47 @@ header = [r't [s]',r'$\Delta t [^\circ C]$',r'$\nu_{real}$',r'$nu_{id}$']
 print("Bestimmung der Guetezahlen")
 print(make_LaTeX_table(data.T,header))
 
+# Erstellung des p-t Diagramms
+close() # Alten plot schleissen
+
+# Druecke und Temperaturen zusammenfuegen
+
+p_ges = array(list(p_b[3:])+list(p_a[6:]))
+T_ges = array(list(T_1[3:])+list(T_2[6:]))
+plot(T_ges,p_ges, 'bx')
+
+def exp_fit(x,A,B):
+    return B*exp(-A/(R*x))
+    
+params , cov = curve_fit(exp_fit,T_ges,p_ges)
+
+L = ufloat(params[0],sqrt(cov[0][0]))
+print("Die Verdampfungswaereme des Arbeitsmediums betraegt : %s" % L)
+
+
+x= linspace(270,330) # Temperaturbereich fuer die Ausgleichskurve
+plot(x,exp_fit(x,params[0],params[1]))
+show()
+#Bestimmung des Massendurchsatz 
+
+dm_dt = -(V*rho_w*c_w+750)*dT2_dt/L
+data = array([t_, dm_dt])
+header = ["$t [s]$",r"$\frac{dm}{dt} [\frac{kg}{s}]$"]
+print("Massendursatz der WP:")
+print(make_LaTeX_table(data.T, header))
+
+
+#Bestimmung der mech. Kompressorleistung
+#Zunaechst muss die Dichte des Arbeitsmediums mit Hilfe der idealen Gas Gl.
+#bestimmt werden : PV/T =const
+
+
+rho_km0 = 5.51 #kg/m^3 vom Blatt
+T_0 = 271.15 # K  Standardbed. 0C
+kappa = 1.14 # Adiabatenkoeff. vom Blatt
+p_0 = 1e5 # 1 Bar Normaldruck
+rho_km = T2_*pa_*rho_km0/(p_0*T_0)
+
+N = ((pb_ * (pa_/pb_)**(1/kappa)-pa_)*dm_dt)/((kappa-1)*rho_km)
+
+print(N)
