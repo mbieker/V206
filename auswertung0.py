@@ -160,20 +160,14 @@ close() # Alten plot schleissen
 
 # Druecke und Temperaturen zusammenfuegen
 x= linspace(270,330) 
-p_ges = array(list(p_a[6:])+list(p_b[3:]))
-T_ges = array(list(T_2[6:])+list(T_1[3:]))
-plot(T_ges,p_ges, 'bx')
+p_ges = array(list(p_b))
+T_ges = array(list(T_1))
+plot(1/T_ges,log(p_ges), 'bx')
 
 
-def exp_fit(x,B):
-    return B*exp(-167.22e3/(R*x))
+m, b = lin_reg(1/T_ges, log(p_ges))
 
-show()
-params , cov = curve_fit(exp_fit,T_ges,p_ges)
-
-#L = ufloat(params[0], sqrt(cov[0][0]))
-L = 167.22e3
-print(params)
+L = -m*R/.120913
 
 print("Die Verdampfungswaereme des Arbeitsmediums betraegt : %s" % L)
 #print("Der Dampfdruck bei 20C betraeragt %s Pa" % exp_fit(283.15,params[0],params[1]))
@@ -194,12 +188,18 @@ print(make_LaTeX_table(data.T, header))
 #bestimmt werden : PV/T =const
 
 
-rho_km0 = 5.51 #kg/m^3 vom Blatt
+rho_km0 = ufloat(5.51,.01) #kg/m^3 vom Blatt
 T_0 = 271.15 # K  Standardbed. 0C
 kappa = 1.14 # Adiabatenkoeff. vom Blatt
 p_0 = 1e5 # 1 Bar Normaldruck
-rho_km = T2_*pa_*rho_km0/(p_0*T_0)
+rho_km =rho_km0 *pa_*T_0/(p_0*T2_)
 
+#Dichten von KM in tabelle ausgeben
+
+data = array([t_,T2_,pa_,rho_km])
+header = ['$t [s]$','$T_2 [K]$', '$p_a [Pa]$',r'$/rho [\frac{kg}{m^3}]$']
+print("Dichten bei verschiedenen Temperaturen")
+print(make_LaTeX_table(data.T,header))
 N = ((pb_ * (pa_/pb_)**(1/kappa)-pa_)*dm_dt)/((kappa-1)*rho_km)
 
 data =array([t_,N, P_])
