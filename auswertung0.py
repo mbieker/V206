@@ -116,10 +116,10 @@ plot(x,T_quad(x,A_2.n,B_2.n,C_3.n),'b', label = u'Quadratischer Fit für $T_2$')
 
 xlabel(u"Zeit [$s$]")
 ylabel(u"Temperatur [$^\circ C$]")
-legend(loc = 'upper left')
+legend()
+show()
 
-
-#Abeltungen definierent
+#Ableitungen definierent
 
 dT1_dt = array([2*A_1 * t[i] + B_1 for i in [8,16,24,32]])
 dT2_dt =array([ 2*A_2 * t[i] + B_2 for i in [8,16,24,32]])
@@ -159,22 +159,26 @@ print(make_LaTeX_table(data.T,header))
 close() # Alten plot schleissen
 
 # Druecke und Temperaturen zusammenfuegen
-
-p_ges = array(list(p_b[3:])+list(p_a[6:]))
-T_ges = array(list(T_1[3:])+list(T_2[6:]))
+x= linspace(270,330) 
+p_ges = array(list(p_a[6:])+list(p_b[3:]))
+T_ges = array(list(T_2[6:])+list(T_1[3:]))
 plot(T_ges,p_ges, 'bx')
 
-def exp_fit(x,A,B):
-    return B*exp(-A/(R*x))
-    
+
+def exp_fit(x,B):
+    return B*exp(-167.22e3/(R*x))
+
+show()
 params , cov = curve_fit(exp_fit,T_ges,p_ges)
 
-L = ufloat(params[0],sqrt(cov[0][0]))
+#L = ufloat(params[0], sqrt(cov[0][0]))
+L = 167.22e3
+print(params)
+
 print("Die Verdampfungswaereme des Arbeitsmediums betraegt : %s" % L)
+#print("Der Dampfdruck bei 20C betraeragt %s Pa" % exp_fit(283.15,params[0],params[1]))
 
-
-x= linspace(270,330) # Temperaturbereich fuer die Ausgleichskurve
-plot(x,exp_fit(x,params[0],params[1]))
+#plot(x,exp(b.n+m.n*(1/x)))
 show()
 #Bestimmung des Massendurchsatz 
 
@@ -198,4 +202,6 @@ rho_km = T2_*pa_*rho_km0/(p_0*T_0)
 
 N = ((pb_ * (pa_/pb_)**(1/kappa)-pa_)*dm_dt)/((kappa-1)*rho_km)
 
-print(N)
+data =array([t_,N, P_])
+header = [r'$t [s]$',r'$P_{mech}$',r'$P_{el}$']
+print(make_LaTeX_table(data.T,header))
