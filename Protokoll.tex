@@ -7,6 +7,7 @@
 \usepackage{inputenc}
 \usepackage{graphicx}
 \usepackage{selinput}
+\usepackage{here}
 \SelectInputMappings{%
 adieresis={ä},
 germandbls={ß},
@@ -37,7 +38,7 @@ In den folgenden Ausführungen soll A die von der Wärmepumpe zu verrichtende Ar
 \label{F1}
 Q_1 = Q_2 + A \Rightarrow \nu = \frac{Q_1}{A}
 \end{equation}
-Für infinitesimal kleine Temperaturänderungen folgt dann aus dem zweiten Hauptsatz der Thermodynamik:
+Für infinitesimal kleine Temparaturänderungen folgt dann aus dem zweiten Hauptsatz der Thermodynamik:
 \begin{equation}
 \label{F2}
 \frac{Q_1}{T_1} - \frac{Q_2}{T_2} = 0
@@ -47,7 +48,7 @@ Dieser Zusammenhang gilt allerdings nur bei Prozessen, die reversibel sind. Dies
 \label{F3}
 \frac{Q_1}{T_1} - \frac{Q_2}{T_2} > 0.
 \end{equation}
-Wenn man Formel (\ref{F2}) nach $Q_2$ in Formel (\ref{F1}) einsetzt, erhält man
+Wenn man Formel (\ref{F2}) nach $Q_2$in Formel (\ref{F1}) einsetzt, erhält man
 \begin{equation}
 \label{F4}
 Q_1 = A + \frac{T_2}{T_1} Q_1
@@ -60,7 +61,7 @@ und
 Für die reale Wärmepumpe gilt dann, aus Formel (\ref{F1}) und (\ref{F3}) folgend,
 \begin{equation}
 \label{F6}
-\nu_{real} < \frac{T_1}{T_1-T_2}.
+\nu_{real} < \frac{T_1}{T_1-T_2}
 \end{equation}
 Für eine umfassende Auswertung des Versuches sind einige weitere Ausdrücke von Nöten.
 So gilt für die mechanische Kompressorleistung
@@ -81,7 +82,7 @@ Für die Güteziffer der Wärmepumpe ergibt sich dann
 Für die Bestimmung des Massendurchsatzes gilt
 \begin{equation}
 \label{F10}
-\frac{\Delta m}{\Delta t} = \frac{(m_2 c_w + m_k c_w) \frac{\Delta T_2}{\Delta t}}{L}.
+\frac{\Delta m}{\Delta t} = \frac{(m_2 c_w + m_k c_w) \frac{\Delta T_2}{\Delta t}}{L}
 \end{equation}
 
 \section{Aufbau und Durchf\"{u}hrung}
@@ -92,6 +93,41 @@ Im Folgenden sollen einige f\"ur eine W\"armepumpe chrakteritischen Gr\"o\ss en 
 \Delta y = \sqrt{\sum_i^N (\frac{\partial y}{\partial x_i} \cdot \Delta x_i)^2}
 \end{equation}
 gegeben. 
+\subsection{Interpolation der Daten}
+Die aufgenommen Temperaturwerte $T_1$ und $T_2$ sollen durch eine quadratische Funktion
+\begin{equation}
+T(t) = At^2 + Bt + C
+\end{equation}
+approximiert werden. Die  nicht lineare Ausgleichsrechnung ergibt f\"uer die Paramater $A, B, C$:
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c}
+
+& $A [\frac{K}{s^2}]$ & $B [\frac{K}{s}]$ & $C [K]$ \\
+\hline
+$T_2$& $(-3.5\pm0.1)10^{-6}$ & $0.0222\pm0.0002$ &$ 293.68\pm0.08$\\
+$T_1$ & $(3.9\pm0.1)10^{-6}$ & $-0.0174\pm0.0002$ & $294.89\pm0.09$\\
+\end{tabular}
+\caption{Regressions-Paramter}
+\end{table} \noindent
+Die  G\"utezahlen $\nu_{real}$ und $\nu_{id}$ sowie der Massendurchsatz und die Leistung des Kompressors werden f\"ur vier gleich\"ma\ss ig \"uber den Messzeitraum verteilte Zeiten gemessen. Dazu werden zun\"achst die Diffrentialquotienten $\frac{d T_1}{\partial t}$ und $\frac{dT_2}{\partial t}$ bestimmt. Dazu werden die Approximationsgleichungen abgeleitet. 
+\begin{equation}
+\frac{dT}{dt}(t) = 2At + B
+\end{equation}
+Daraus ergibt mit den Paramterwerten und den Zeiten $t$:
+\begin{table}[H]
+\centering 
+\begin{tabular}{c|c|c|c|c}
+\hline
+$t [s]$ & $T_1 [K]$ & $\frac{dT_1}{dt} \frac{K}{s}]$ & $T_2 [K]$ & $\frac{dT_2}{dt} [\frac Ks]$  \\
+\hline
+480 & 303.65 & 0.01889+/-0.00022 & 287.35 & -0.01370+/-0.00024 \\
+960 & 311.85 & 0.01556+/-0.00028 & 281.65 & -0.00998+/-0.00030 \\
+1440 & 318.45 & 0.01223+/-0.00035 & 277.85 & -0.0063+/-0.0004 \\
+1920 & 323.65 & 0.0089+/-0.0004 & 275.65 & -0.0026+/-0.0005 \\
+\hline
+\end{tabular}
+\end{table}
 \section{Diskussion}
 Hier kommt die Diskussion hin.
 \section{Literatur- und Abbildungsverzeichnis}
