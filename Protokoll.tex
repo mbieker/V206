@@ -86,7 +86,10 @@ Für die Bestimmung des Massendurchsatzes gilt
 \end{equation}
 
 \section{Aufbau und Durchf\"{u}hrung}
-Hier folgt der Aufbau und die Durchführung.
+\subsection{Die Wärmepumpe}
+Der Versuch wird an einer Wärmepumpe durchgeführt. Eine Wärmepumpe ist aufgebaut aus einem Kompressor, einem Kondensator und einem Verdampfer, einer Drossel sowie zwei Reservoirs. Als Reservoir dienen zwei Wassereimer mit einem Füllvolumen von 4 Litern. Die Wärmepumpe entzieht im Betrieb unter Aufwendung von Arbeit dem kälteren Reservoir Wärmeenergie und gibt diese an das wärmere Reservoir ab. Die Wärmeenergie wird mit Hilfe eines Fluides übertragen. Das Fluid ist so gewählt, dass es unter niedrigem Druck bei Wärmezufuhr verdampft und unter hohem Druck bei Wärmeentzug kondensiert. Ein Schema zum Funktionsprinzip der Wärmepumpe ist der Abbildung 1 zu entnehmen. Der genaue Versuchsaufbau ist in Abbildung 2 ersichtlich.
+\subsection{Das Messverfahren}
+Für die Messung ist die Wärmepumpe in Betrieb zu nehmen. In einem Abstand von einer Minute sollen dann die Drücke $p_a$ und $p_b$, die Temparaturen $t_a$ und $t_b$ und die geleistete Arbeit des Kompressors aufgezeichnet werden. Die Messung soll beendet werden, wenn das warme Reservoir eine Temparatur von $50^ \circ C$ erreicht hat.
 \section{Auswertung}
 Im Folgenden sollen einige f\"ur eine W\"armepumpe chrakteritischen Gr\"o\ss en bestimmt werden. Die w\"ahrend der Versuchsdurchf\"uhrung gewonnenen Messwerte sind im Anhang in Tabelle \ref{rohdaten} zu finden. Ausgleichs- und Fehlerrechnungen in der Auswertung wurden mit verschiedenen Pythonbibliotheken (SciPy, uncertainties und matplotlib) durchgef\"uhrt. Dabei verwendet Python uncertainties die Fehlerfortpflanzung nach Gau\ss. Bei diesem Verfahren ist der Fehler einer von mehreren Variablen mit den Fehleren $\Delta x_i$ abh\"angeden Gr\"o\ss e $y$ durch 
 \begin{equation}
