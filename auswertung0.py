@@ -102,8 +102,10 @@ C_1 = ufloat(params[2],sqrt(cov[2][2]))
 params, cov = curve_fit(T_quad,t,T_2)
 A_2 = ufloat(params[0],sqrt(cov[0][0]))
 B_2 = ufloat(params[1],sqrt(cov[1][1]))
-C_3 = ufloat(params[2],sqrt(cov[2][2]))
+C_2 = ufloat(params[2],sqrt(cov[2][2]))
 
+data = [[A_1,B_1,C_1],[A_2,B_2,C_2]]
+print(make_LaTeX_table(array(data),['A','B','C']))
 #Plot Data und Fit
 x = linspace(0,33*60) # Werte fuer die Interpolationsfunktionen
 #T1
@@ -112,7 +114,7 @@ plot(x,T_quad(x,A_1.n,B_1.n,C_1.n),'r', label = u'Quadratischer Fit für $T_1$')
 
 #T2 Das Gleoche in blau
 plot(t,T_2,'bo', label= r'Messwerte $T_2$')
-plot(x,T_quad(x,A_2.n,B_2.n,C_3.n),'b', label = u'Quadratischer Fit für $T_2$')
+plot(x,T_quad(x,A_2.n,B_2.n,C_2.n),'b', label = u'Quadratischer Fit für $T_2$')
 
 xlabel(u"Zeit [$s$]")
 ylabel(u"Temperatur [$^\circ C$]")
