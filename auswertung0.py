@@ -1,7 +1,7 @@
 # Using the magic encoding
 # -*- coding: utf-8 -*-
 from pylab import *
-from uncertainties import  *
+from uncertainties import *
 from scipy.optimize import curve_fit
 def make_LaTeX_table(data,header, flip= 'false', onedim = 'false'):
     output = '\\begin{tabular}{'
@@ -143,13 +143,14 @@ output = make_LaTeX_table(data.T, header)
 print(output)
 
 ## Guetezaheln berechen fuer die Verschieden Zeitupunkte
-rho_w = ufloat(0.99799,0) # kg/L Dichte von Wasser bei 20C Teubner phys. Praktikum
-c_w =ufloat(4180,2)  # Spezifische Waerme Kapazitaet des wasser 20-40 C
-V = ufloat(4,0.01)
+rho_w = 0.998 # kg/L Dichte von Wasser bei 20C Teubner phys. Praktikum
+c_w =4180  # Spezifische Waerme Kapazitaet des wasser 20-40 C
+V = ufloat = 4.0
+print("m Wasser %s" % (rho_w*V))
 R = 8.3143 # molare Gaskonstante
 nu_real = ( V*rho_w*c_w + 750)* dT1_dt /P_
 nu_id   =[round(T1_[i]/(T1_[i]-T2_[i]),2) for i in range(4)]
-
+yx = ufloat(2,3)
 #Ausgabe der Tabelle
 
 data = array([t_,T1_-T2_, nu_real, nu_id])
@@ -168,7 +169,7 @@ plot(1/T_ges,log(p_ges), 'bx')
 
 
 m, b = lin_reg(1/T_ges, log(p_ges))
-
+print(str(m))
 L = -m*R/.120913
 
 print("Die Verdampfungswaereme des Arbeitsmediums betraegt : %s" % L)

@@ -121,13 +121,50 @@ Daraus ergibt mit den Paramterwerten und den Zeiten $t$:
 \hline
 $t [s]$ & $T_1 [K]$ & $\frac{dT_1}{dt} \frac{K}{s}]$ & $T_2 [K]$ & $\frac{dT_2}{dt} [\frac Ks]$  \\
 \hline
-480 & 303.65 & 0.01889+/-0.00022 & 287.35 & -0.01370+/-0.00024 \\
-960 & 311.85 & 0.01556+/-0.00028 & 281.65 & -0.00998+/-0.00030 \\
-1440 & 318.45 & 0.01223+/-0.00035 & 277.85 & -0.0063+/-0.0004 \\
-1920 & 323.65 & 0.0089+/-0.0004 & 275.65 & -0.0026+/-0.0005 \\
-\hline
+480 & 303.65 & $0.01889\pm0.00022$ & $287.35$ & $-0.01370\pm0.00024 $\\
+960 & 311.85 & $0.01556\pm0.00028$ & $281.65$ &$ -0.00998\pm0.00030$ \\
+1440 & 318.45 & $0.01223\pm0.00035$ &$ 277.85$ & $-0.0063\pm0.0004$ \\
+1920 & 323.65 & $0.0089\pm0.0004$ & $275.65$ &$ -0.0026\pm0.0005$ \\
+
 \end{tabular}
+\caption{Werte der Ableitungen von $T_1$ und $T_2$}
 \end{table}
+\subsection{Bestimmung der Gütezahlen $\nu_{real}$ und $\nu_{id}$}
+\noindent Mit diesen Werten und mit der gegebenen Wärmekapazität des Eimers und der Kupferspule
+\[c_km_k = 750\frac{J}{K}\]
+und Wärmekapazität des Wassers 
+\[c_w = 4180 \frac{J}{K\cdot kg}\]
+kann die reale Gütezahl der Wärmepumpe $nu_{real}$ die verschiedenen Zeiten berechnet werden. Für die Masse des im Eimer enthaltenen Wassers gilt mit $V_{Eimer} = 4 \ell$ und $\rho_{Wasser} =0.998 \frac{kg}{\ell}$
+\[m_{Wasser} = 3.992kg. \]
+Die sich hieraus ergebenden Werte für $\nu_{real}$ finden sich in Tabelle.
+Die ideale Gütezahl einer Wärmepumpe berechnet sich nach Formel (\ref{F4}) wie folgt:
+\begin{equation}
+\nu_{id} = \frac{T_1}{\Delta T}
+\end{equation}
+Mit den gemessenen Größen $T_1$ und $\Delta T$ wurde die Gütezahl berechnet:
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c}
+
+t [s] & $\Delta T [K]$ & $\nu_{real}$ & $nu_{id}$ \\
+\hline
+480  & 16.3 &$ 2.68\pm0.03$ & 18.63\\
+960  & 30.2 &$ 2.22\pm0.04$ & 10.33\\
+1440 & 40.6 &$ 1.71\pm0.05$ &  7.84\\
+1920 & 48.0 &$ 1.24\pm0.06$ &  6.74\\
+
+\end{tabular}
+\label{guetewerte}
+\caption{$\nu_{real}$ der Wärmepumpe}
+\end{table} 
+\subsection{Bestimmung des Massendurchsatzes $\frac{dm}{dt}$}
+Um den Massendurchsatz des Kompressors mit Formel \ref{F10} zu bestimmen müss zunächst die Verdampungswärme des hier werdendeten Kühlmittels Dichlordiflourmethan ($Cl_2F_2C$) bestimmt werden. Dies ist durch Aufsetllung der Dampfdruckkurve des Kühlmittels möglich. Da iim Kondensator und im Verdampfer der Wärmepumpe jeweils eine flüssige und eine gasförmige Phase vorliegt, ist der Zusammenhang zwischen dem im jeweiligen Bauteil gemessenen Druck und der dortigen Temperatur durch den folgenden Zusammenhang aus der Anleitung zu Versuch 203 gegeben:
+\begin{equation}
+ln(p)= - \frac{L}{R_s} \cdot \frac{1}{T} + C
+\end{equation}
+Diese Gleichung ist linear in $\frac{1}{T}$ und es kann durch eine einfache Regression ein Wert für
+\[m = -\frac{L}{R_s} = \]
+ 
 \section{Diskussion}
 Hier kommt die Diskussion hin.
 \section{Literatur- und Abbildungsverzeichnis}
