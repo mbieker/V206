@@ -131,6 +131,7 @@ $t [s]$ & $T_1 [K]$ & $\frac{dT_1}{dt} \frac{K}{s}]$ & $T_2 [K]$ & $\frac{dT_2}{
 
 \end{tabular}
 \caption{Werte der Ableitungen von $T_1$ und $T_2$}
+\label{ableitungen}
 \end{table}
 \subsection{Bestimmung der Gütezahlen $\nu_{real}$ und $\nu_{id}$}
 \noindent Mit diesen Werten und mit der gegebenen Wärmekapazität des Eimers und der Kupferspule
@@ -161,15 +162,58 @@ t [s] & $\Delta T [K]$ & $\nu_{real}$ & $nu_{id}$ \\
 \caption{$\nu_{real}$ der Wärmepumpe}
 \end{table} 
 \subsection{Bestimmung des Massendurchsatzes $\frac{dm}{dt}$}
-Um den Massendurchsatz des Kompressors mit Formel \ref{F10} zu bestimmen müss zunächst die Verdampungswärme des hier werdendeten Kühlmittels Dichlordiflourmethan ($Cl_2F_2C$) bestimmt werden. Dies ist durch Aufsetllung der Dampfdruckkurve des Kühlmittels möglich. Da iim Kondensator und im Verdampfer der Wärmepumpe jeweils eine flüssige und eine gasförmige Phase vorliegt, ist der Zusammenhang zwischen dem im jeweiligen Bauteil gemessenen Druck und der dortigen Temperatur durch den folgenden Zusammenhang aus der Anleitung zu Versuch 203 gegeben:
+Um den Massendurchsatz des Kompressors mit Formel \ref{F10} zu bestimmen müss zunächst die Verdampungswärme des hier werdendeten Kühlmittels Dichlordiflourmethan ($Cl_2F_2C$) bestimmt werden. Dies ist durch Aufsetllung der Dampfdruckkurve des Kühlmittels möglich. Da im Kondensator und im Verdampfer der Wärmepumpe jeweils eine flüssige und eine gasförmige Phase vorliegt, ist der Zusammenhang zwischen dem im jeweiligen Bauteil gemessenen Druck und der dortigen Temperatur durch den folgenden Zusammenhang aus der Anleitung zu Versuch 203 gegeben:
 \begin{equation}
 ln(p)= - \frac{L}{R_s} \cdot \frac{1}{T} + C
 \end{equation}
-Diese Gleichung ist linear in $\frac{1}{T}$ und es kann durch eine einfache Regression ein Wert für
-\[m = -\frac{L}{R_s} = \]
- 
+Wird $ln(p)$ durch $y$ und $\frac1T$ durch x substituiert, kann mit den gemessenen Werten für Druck und Temperatur eine lineare Regression\footnote{siehe Abb. \ref{reg_pic} und  für die verwendeten Werte siehe Tabelle \ref{rerval} } durchgeführt werden. durchgeführt werden. Mit der Steigung der Ausgleichsgerade beträgt
+\[m = 42 \pm 1 .\]
+Hieraus kann die Verdampfungswärme $L$ mit der universellen Gaskonstante $R=..$ und der molaren Masse von Dichlordiflourmethan $M = ...$ berechent werden.
+\begin{equation}
+L = -\frac mR_s = -\frac {m \cdot M}{R} =
+\end{equation}
+Der Massendurchsatz des Kompressors kann nun mit Formel \ref{F10} durchgeführt werden. Die Wärmekapazität des kalten Reservoirs (Eimer, Kupferspuhle und Wasser) wird als gleich der des warmen Reservoirs (siehe 4.2) angenommen. Mit den Werten aus Tabelle \ref{ableitungen} für den Differentialquotienten $\frac{dT_2}{dt}$ ergeben sich für den Massendurchsatz zu den untersuchten Zeiten folgende Werte.
+\begin{table}
+
+\caption{Massendurchsatz des Kompressors zu verschiedenen Zeiten}
+\end{table}
+\subsection{Bestimmung der mechanischen Kompressorleistung $N_{mech}$}
+Zur Bestimmung der mechanischen Kompressorleistung nach Formel \ref{F7} wird neben den gegebenen, gemessenen oder bereits ermittelten Größen $\kappa$, $p_a$, $p_b$ und $\frac{dm}{dt}$ auch die Dichte des gasförmigen Kühlmittels $\rho$ benötigt. Diese ist Abhängig vom Druck $p_a$ und der Temperatur $T_2$. Aus der idealen Gasgleichung 
+\begin{equation}
+pV=nRT
+\end{equation}
+folgt mit $n= \frac{m}{M}$ und $\rho = \frac mV$
+\begin{equation}
+\frac{p_a}{T \rho} = \frac{R}{M} = const. \Rightarrow \rho = \frac{p_aT_0}{p_0T_2} \rho.
+\end{equation}
+Hieraus ergeben sich mit den den gemessenen Größen für $p_a$ und $T_2$ und den Angaben aus der Versuchsanleitung ($\rho_0 = 5.5 \frac{kg}{m^3}$ bei $p_0  = 10^5 Pa$ und $T_0 = 273.15 K$) fogende Dichten.
+\begin{table}
+\caption{Dichten des gasförmigen Kühlmittels bei verschiedenen Drücken und Temperaturen}
+\end{table}
+
+\noindent
+Zusammen mit den anderen bekannten Größen kann nun die mechanische Kompressorleistung $N_{mech}$ berechnet werden.
+
 \section{Diskussion}
-Hier kommt die Diskussion hin.
+In Abbildung 1 lässt sich erkennen, dass die bei der nicht-linearean Ausgleichsrechnung bestimmten Funktionen den Verlauf der gemessenen Temperaturen angemessen berschreiben. 
+Die Bestimmung der Gütezahlen ergab, dass $\nu_{id}$ sehr viel größer als $\nu_{real}$ ist. Dies kann auf verschiedene Gründe zurückgefphrt werden. So führen zum Beispiel Wärmeverluste in den Eimern oder in den Kupferrohren zwischen den einzelnen Bauteilen dazu, dass nicht die gesamte durch die Wärmepumpe transportierte Wärme durch die Temperaturmessung erfasst wird. Des Weiteren handelt es sich bei dem in diesem Versuch anders als bei der Herleitung für $\nu_{id}$ angenommen um einenen irreversiblen Prozess. Daraus folgt das der Wärmetransport nicht mit dem maximal theoretisch möglichen Wirkungsgrad abläuft. Daher ist wie in den Gleichungen (5) und (6) beschrieben
+\[\nu_{id} >> \nu_{real}.\]
+Im Folgenden soll der in 4.3 bestimmte Wert für die Verdampfungswärme des Kältemittels $Cl_2F_2C$ mit dem Literaturwert[2] verglichen werden:
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|l}
+
+	$L_{exp}$ & $L_{Lit}$ & $\frac{\Delta L}{L_{exp}}$ \\
+	\hline
+	21 & 22 & 23 \\
+\end{tabular}
+\end{table}\noindent
+Diese Abweichung ist auf die relativ hohe Ungenauigkeit bei der Messung des Druckes in der Apparatur und die zeitliche Verzögerung bei der Aufnahme der Messwerte. Diese war unvermeidbar, da nicht alle 5 Messwerte zeitgleich abgelesen und notiert werden konnten.
+Der Vergleich der Werte aus Tablle \ref{Leistungen} für die eingesetzte elektrische Leistung und die abgegebene mechanische Leistung des Kompressors liefert einen durchschnittlichen Wirkungsgrad von
+\begin{equation}
+\bar \eta  = \frac 14 \sum_{i=1}^{4}\frac{A_{mech.}}{A_{elek.}} = ...\%
+\end{equation}
+
 \section{Literatur- und Abbildungsverzeichnis}
 Hier befindet sich das Literatur- und Abbildungsverzeichnis.
 \section{Anhang}

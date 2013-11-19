@@ -1,6 +1,6 @@
 # Using the magic encoding
 # -*- coding: utf-8 -*-
-from pylab import *
+
 from uncertainties import *
 from scipy.optimize import curve_fit
 def make_LaTeX_table(data,header, flip= 'false', onedim = 'false'):
@@ -150,7 +150,7 @@ print("m Wasser %s" % (rho_w*V))
 R = 8.3143 # molare Gaskonstante
 nu_real = ( V*rho_w*c_w + 750)* dT1_dt /P_
 nu_id   =[round(T1_[i]/(T1_[i]-T2_[i]),2) for i in range(4)]
-yx = ufloat(2,3)
+
 #Ausgabe der Tabelle
 
 data = array([t_,T1_-T2_, nu_real, nu_id])
